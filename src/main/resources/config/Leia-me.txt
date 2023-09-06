@@ -1,0 +1,79 @@
+
+
+Anotação `@AutoConfigureTestDatabase`
+
+A anotação `@AutoConfigureTestDatabase` faz parte do ecossistema Spring Boot e é usada para configurar automaticamente o banco de dados a ser 
+usado em testes unitários ou de integração. O atributo `replace` dessa anotação especifica como o banco de dados padrão deve ser substituído 
+durante os testes. O valor `Replace.NONE` significa que o banco de dados padrão não será substituído.
+
+Aqui está uma explicação mais detalhada do significado e do uso da anotação `@AutoConfigureTestDatabase`:
+
+- **Substituição do Banco de Dados:** Em muitos aplicativos Spring Boot, o banco de dados padrão usado na produção é configurado em 
+  `application.properties` ou `application.yml`. No entanto, durante os testes, você geralmente deseja usar um banco de dados diferente, como o 
+   H2 Database ou um banco de dados em memória, para garantir que os testes sejam isolados e não afetem o banco de dados de produção.
+
+- **Opções de Substituição:** A anotação `@AutoConfigureTestDatabase` oferece várias opções para substituir o banco de dados padrão durante os 
+    testes. O atributo `replace` controla como essa substituição é realizada. Alguns dos valores possíveis incluem:
+  
+  - `Replace.NONE` (valor padrão): Isso significa que o banco de dados padrão não será substituído. Se você configurou um banco de dados 
+     diferente para testes, ele será usado. Se você não configurou um banco de dados de teste, pode resultar em um erro de configuração.
+
+  - `Replace.AUTO_CONFIGURED`: Isso indica que o Spring Boot deve substituir automaticamente o banco de dados padrão pelo banco de dados 
+     configurado para testes. Geralmente, isso significa que ele usará um banco de dados em memória, como o H2 Database, se disponível.
+
+  - `Replace.NONE_DEFINED`: Isso indica que a substituição deve ocorrer apenas se você especificou explicitamente um banco de dados diferente 
+     para testes usando a propriedade `spring.datasource.type` em seu arquivo de propriedades de teste.
+
+- **Uso Típico:** O uso típico dessa anotação ocorre em classes de teste que precisam de um banco de dados específico para seus testes. Por 
+    exemplo, ao escrever testes de integração, você pode usar `@AutoConfigureTestDatabase(replace = Replace.NONE)` para garantir que o banco de 
+    dados configurado em seu arquivo de propriedades de teste seja usado, em vez de um banco de dados em memória padrão. Isso é útil quando você 
+    precisa testar interações com um banco de dados real.
+
+Em resumo, a anotação `@AutoConfigureTestDatabase` é uma ferramenta poderosa para controlar como o banco de dados é configurado durante os testes 
+em um aplicativo Spring Boot, permitindo que você substitua ou mantenha o banco de dados padrão, dependendo das necessidades do seu teste. O 
+valor `Replace.NONE` indica que nenhum banco de dados padrão será substituído.
+
+------------------------------------------------------------------------- // -------------------------------------------------------------------------
+
+assertNotNull
+
+O código `assertNotNull(criarProduto);` faz parte de testes unitários escritos com o framework JUnit em Java. Esse código é usado para verificar 
+se o objeto `criarProduto` não é nulo (ou seja, possui uma referência válida).
+
+Aqui está uma explicação mais detalhada:
+
+- **JUnit:** O JUnit é um framework de teste amplamente utilizado em Java para escrever testes unitários. Testes unitários são usados para 
+  verificar se partes específicas de seu código, geralmente métodos ou funções individuais, funcionam como esperado.
+
+- **assertNotNull:** `assertNotNull` é uma asserção fornecida pelo JUnit que verifica se o valor ou objeto fornecido como argumento não é nulo. 
+  Se o objeto for nulo, a asserção falhará e o teste será considerado não aprovado (falhou).
+
+- **Exemplo de Uso:** No contexto de um teste unitário, você geralmente realiza alguma operação ou chama um método em seu código e obtém um 
+  resultado, que é armazenado na variável `criarProduto` neste caso. A asserção `assertNotNull(criarProduto);` é usada para garantir que o 
+  resultado (nesse caso, o objeto `criarProduto`) não seja nulo. Se `criarProduto` for nulo, o teste falhará.
+
+As asserções como `assertNotNull` são fundamentais em testes unitários para verificar o comportamento esperado de seu código e garantir que ele 
+funcione corretamente em várias situações. Se uma asserção falhar durante a execução do teste, você saberá que algo está errado e pode investigar 
+o problema.
+
+------------------------------------------------------------------------- // -------------------------------------------------------------------------
+
+Anotação `@Rollback(false)`
+
+A anotação `@Rollback(false)` é uma anotação usada em testes unitários e de integração quando se trabalha com bancos de dados. Essa anotação é 
+específica para estruturas de teste, como o framework JUnit, e é usada para controlar o comportamento de transações de banco de dados dentro do 
+contexto dos testes.
+
+Quando um teste é anotado com `@Rollback(false)`, significa que a transação que envolve o teste não será automaticamente revertida (rollback) 
+após a execução do teste. Em vez disso, as alterações feitas no banco de dados durante a execução do teste serão confirmadas e permanecerão no 
+banco de dados após o término do teste.
+
+Essa anotação é útil em situações em que você deseja testar o comportamento de seu código em relação a alterações persistentes no banco de dados. 
+Por exemplo, você pode querer testar a criação, atualização ou exclusão de registros em uma tabela do banco de dados e verificar se essas 
+alterações foram aplicadas corretamente.
+
+No entanto, é importante usar essa anotação com cuidado, pois ela pode ter impacto na integridade do seu banco de dados de teste. Se você não 
+reverter manualmente as alterações feitas no banco de dados durante a execução do teste, essas alterações permanecerão no banco de dados e 
+podem afetar outros testes subsequentes. Portanto, é apropriado usar `@Rollback(false)` apenas em cenários específicos em que você deseja que 
+as alterações persistam no banco de dados de teste.
+
