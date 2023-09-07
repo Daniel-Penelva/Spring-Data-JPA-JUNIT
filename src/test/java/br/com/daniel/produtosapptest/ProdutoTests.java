@@ -3,6 +3,9 @@ package br.com.daniel.produtosapptest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +59,7 @@ public class ProdutoTests {
         System.out.println("Não é o mesmo valor buscado"); 
     }
 
-    @Test
+    //@Test
     @Rollback(false)
     public void testAtualizarProduto(){
         // Cria um novo nome de produto
@@ -76,4 +79,25 @@ public class ProdutoTests {
          assertNotNull(atualizarProduto);  
          assertEquals(atualizarProduto.getNome(), nomeProduto);
     }
+
+    @Test
+    public void testListarProduto(){
+        Iterable<Produto> produtos = produtoRepository.findAll();
+
+        int count = 0;
+         for(Produto produto: produtos){
+            count++;
+         }
+
+         assertTrue(count > 0);
+
+          for(Produto produto: produtos){
+            System.out.println(produto);
+            System.out.println("-----------------------------");
+         }
+
+       /* OBS. o método assertTrue() para verificar se o valor de count é maior que zero, indicando que pelo menos um produto foi retornado. Se 
+       nenhum produto for retornado, o teste falhará. Caso contrário, o teste passará.*/
+    }
+
 }

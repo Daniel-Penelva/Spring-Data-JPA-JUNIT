@@ -94,3 +94,39 @@ Aqui está como funciona:
 
 Esta asserção é útil para verificar se operações que retornam objetos realmente estão retornando um objeto válido em vez de um valor nulo 
 inesperado. Se a asserção falhar, você pode revisar o código ou a consulta que deveria retornar o objeto e corrigir o problema, se necessário.
+
+------------------------------------------------------------------------- // -------------------------------------------------------------------------
+
+assertTrue()
+
+O método `assertTrue()` é uma função de assertiva (assertion) que faz parte da biblioteca de testes do JUnit, um framework amplamente utilizado 
+para testes em Java. Essa função é usada para verificar se uma condição é verdadeira durante um teste unitário. Se a condição for verdadeira, o 
+teste continua a ser executado sem problemas; no entanto, se a condição for falsa, o teste falha e é indicado como não aprovado.
+
+Aqui está a assinatura do método `assertTrue()`:
+
+```java
+assertTrue(boolean condition)
+```
+
+- `condition`: Uma expressão booleana que você deseja avaliar como verdadeira.
+
+O `assertTrue()` é amplamente utilizado para verificar se os resultados dos testes correspondem ao comportamento esperado. Por exemplo, você 
+pode usá-lo para verificar se um valor retornado por um método é igual ao valor esperado ou para verificar se um objeto está em um estado 
+específico após a execução de algum código.
+
+Aqui está um exemplo simples de uso do `assertTrue()`:
+
+```java
+@Test
+public void testAlgumaFuncionalidade() {
+    int resultado = minhaClasse.realizarAlgumaOperacao();
+    assertTrue(resultado > 0); // Verifica se o resultado é maior que zero
+}
+```
+
+Neste exemplo, o teste passará se o resultado da função `realizarAlgumaOperacao()` for maior que zero e falhará se for igual a zero ou menor que 
+zero.
+
+O `assertTrue()` é uma ferramenta poderosa para validar o comportamento esperado em seus testes unitários e pode ser usado para verificar 
+diversas condições em seu código.
