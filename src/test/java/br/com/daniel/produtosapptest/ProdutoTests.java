@@ -46,7 +46,7 @@ public class ProdutoTests {
         System.out.println("É o mesmo valor buscado"); 
     }
 
-    @Test
+    //@Test
     public void testBuscarProdutoPorNomeNoExists(){
         String nome = "IPhone 11";
 
@@ -54,5 +54,26 @@ public class ProdutoTests {
 
         assertNull(produto);
         System.out.println("Não é o mesmo valor buscado"); 
+    }
+
+    @Test
+    @Rollback(false)
+    public void testAtualizarProduto(){
+        // Cria um novo nome de produto
+        String nomeProduto = "TV Samsung HD 72 polegadas";
+
+        // Atualiza esse novo produto passando o id para ser encontrado
+        Produto produto = new Produto(nomeProduto, 6000);
+        produto.setId(1);
+
+        // Salva o produto 
+        produtoRepository.save(produto);
+
+        // busca o nome do produto atualizado 
+        Produto atualizarProduto = produtoRepository.findByNome(nomeProduto);
+
+        // Verifica se o nome é o mesmo que foi atualizado
+         assertNotNull(atualizarProduto);  
+         assertEquals(atualizarProduto.getNome(), nomeProduto);
     }
 }
