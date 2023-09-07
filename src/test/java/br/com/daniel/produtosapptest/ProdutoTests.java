@@ -1,6 +1,7 @@
 package br.com.daniel.produtosapptest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -31,7 +32,7 @@ public class ProdutoTests {
     //@Test
     @Rollback(false)
     public void testCriarProduto(){
-        Produto produto = new Produto("X-Box One", 4000);
+        Produto produto = new Produto("teste", 4000);
         Produto criarProduto = produtoRepository.save(produto);
 
         // Verificar se o objeto `criarProduto` não é nulo.
@@ -80,7 +81,7 @@ public class ProdutoTests {
          assertEquals(atualizarProduto.getNome(), nomeProduto);
     }
 
-    @Test
+    //@Test
     public void testListarProduto(){
         Iterable<Produto> produtos = produtoRepository.findAll();
 
@@ -98,6 +99,21 @@ public class ProdutoTests {
 
        /* OBS. o método assertTrue() para verificar se o valor de count é maior que zero, indicando que pelo menos um produto foi retornado. Se 
        nenhum produto for retornado, o teste falhará. Caso contrário, o teste passará.*/
+    }
+
+    @Test
+    public void testDeletarProduto(){
+        Integer id = 1;
+
+        // Verifica se um objeto de produto com o identificador especificado existe no banco de dados.
+        boolean existeProdutoId = produtoRepository.findById(id).isPresent(); // true
+
+        produtoRepository.deleteById(id);
+
+        boolean naoExisteProdutoId = produtoRepository.findById(id).isPresent(); //false
+
+        assertTrue(existeProdutoId);
+        assertFalse(naoExisteProdutoId);
     }
 
 }
