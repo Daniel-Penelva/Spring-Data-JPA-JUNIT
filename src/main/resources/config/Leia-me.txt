@@ -144,3 +144,27 @@ método retorna true; caso contrário, retorna false.
 Portanto, a linha de código produtoRepository.findById(id).isPresent() verifica se um objeto de produto com o identificador especificado existe 
 no banco de dados. Se o objeto for encontrado, a expressão será avaliada como true, indicando que o objeto está presente. Se o objeto não for 
 encontrado, a expressão será avaliada como false, indicando que o objeto não está presente.
+
+------------------------------------------------------------------------- // -------------------------------------------------------------------------
+
+Anotação @TestMethodOrder
+
+A anotação @TestMethodOrder é usada em testes JUnit 5 (@TestMethodOrder(OrderAnnotation.class)) para especificar a ordem de execução dos métodos 
+de teste em uma classe de teste. Ela permite que você controle a ordem através da anotação @Order() em que os métodos de teste são executados. 
+Por exemplo:
+
+@TestMethodOrder(OrderAnnotation.class)
+public class ProdutoTests{ 
+
+    @Test
+    @Rollback(false)
+    Order(1)
+    public void testCriarProduto(){
+        Produto produto = new Produto("teste", 4000);
+        Produto criarProduto = produtoRepository.save(produto);
+        assertNotNull(criarProduto);
+    }
+}
+
+Neste caso, estou usando o JUnit 4 @TestMethodOrder(MethodOrderer.Alphanumeric.class), o que significa que está configurando a ordem de execução 
+dos métodos de teste para ser alfabética. Isso significa que os métodos de teste serão executados em ordem alfabética com base em seus nomes.
