@@ -77,3 +77,20 @@ reverter manualmente as alterações feitas no banco de dados durante a execuç�
 podem afetar outros testes subsequentes. Portanto, é apropriado usar `@Rollback(false)` apenas em cenários específicos em que você deseja que 
 as alterações persistam no banco de dados de teste.
 
+------------------------------------------------------------------------- // -------------------------------------------------------------------------
+
+assertNull
+
+O script `assertNull(produto);` é uma asserção utilizada em testes unitários em Java. Ela verifica se a variável `produto` é nula (ou seja, não 
+possui referência a um objeto). Se a variável for nula, o teste passa; caso contrário, o teste falha.
+
+No contexto de testes de integração ou testes de repositório, é comum usar essa asserção para verificar se uma consulta ou método de busca não 
+retornou um resultado nulo quando se esperava que fosse encontrado algo.
+
+Aqui está como funciona:
+
+- Se `produto` for nulo, o teste continua normalmente.
+- Se `produto` não for nulo (ou seja, se algo foi encontrado), o teste irá falhar, indicando que o comportamento esperado não ocorreu.
+
+Esta asserção é útil para verificar se operações que retornam objetos realmente estão retornando um objeto válido em vez de um valor nulo 
+inesperado. Se a asserção falhar, você pode revisar o código ou a consulta que deveria retornar o objeto e corrigir o problema, se necessário.

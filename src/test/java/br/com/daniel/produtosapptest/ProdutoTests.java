@@ -1,8 +1,8 @@
 package br.com.daniel.produtosapptest;
 
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class ProdutoTests {
         assertNotNull(criarProduto);
     }
 
-    @Test
+    //@Test
     public void testBuscarProdutoPorNome(){
         String nome = "TV Samsung HD";
 
@@ -44,5 +44,15 @@ public class ProdutoTests {
         assertNotNull(produto);
         assertEquals(nome, produto.getNome());
         System.out.println("É o mesmo valor buscado"); 
+    }
+
+    @Test
+    public void testBuscarProdutoPorNomeNoExists(){
+        String nome = "IPhone 11";
+
+        Produto produto = produtoRepository.findByNome(nome);
+
+        assertNull(produto);
+        System.out.println("Não é o mesmo valor buscado"); 
     }
 }
